@@ -63,55 +63,55 @@ Rectangle {
 			switch (event.key) {
 				case Qt.Key_Up:
 					forwardButton.pressed = false	
-					manager.send_command("forward")
+					manager.sendCommand("forward")
 					break
 				case Qt.Key_Down:
 					backwardButton.pressed = false	
-					manager.send_command("backward")
+					manager.sendCommand("backward")
 					break
 				case Qt.Key_Left:
 					leftButton.pressed = false	
-					manager.send_command("left")
+					manager.sendCommand("left")
 					break
 				case Qt.Key_Right:
 					rightButton.pressed = false	
-					manager.send_command("right")
+					manager.sendCommand("right")
 					break
 				case Qt.Key_PageUp:
 					counterclockwiseButton.pressed = false	
-					manager.send_command("counterclockwise")
+					manager.sendCommand("counterclockwise")
 					break
 				case Qt.Key_PageDown:
 					clockwiseButton.pressed = false	
-					manager.send_command("clockwise")
+					manager.sendCommand("clockwise")
 					break
 				case Qt.Key_C:
 					sitButton.pressed = false	
-					manager.send_command("sit")
+					manager.sendCommand("sit")
 					break
 				case Qt.Key_Space:
 					standButton.pressed = false	
-					manager.send_command("stand")
+					manager.sendCommand("stand")
 					break
 				case Qt.Key_X:
 					lieButton.pressed = false	
-					manager.send_command("lie")
+					manager.sendCommand("lie")
 					break
 				case Qt.Key_1:
 					emote1Button.pressed = false	
-					manager.send_command("emote1")
+					manager.sendCommand("emote1")
 					break
 				case Qt.Key_2:
 					emote2Button.pressed = false	
-					manager.send_command("emote2")
+					manager.sendCommand("emote2")
 					break
 				case Qt.Key_3:
 					emote3Button.pressed = false	
-					manager.send_command("emote3")
+					manager.sendCommand("emote3")
 					break
 				case Qt.Key_4:
 					emote4Button.pressed = false	
-					manager.send_command("emote4")
+					manager.sendCommand("emote4")
 					break
 			}
 		}
@@ -149,17 +149,17 @@ Rectangle {
 			CustomButton {
 				id: "sitButton"
 				text: "Sit"
-				onClicked: manager.send_command("sit")
+				onClicked: manager.sendCommand("sit")
 			}
 			CustomButton {
 				id: "standButton"
 				text: "Stand"
-				onClicked: manager.send_command("stand")
+				onClicked: manager.sendCommand("stand")
 			}
 			CustomButton {
 				id: "lieButton"
 				text: "Lie"
-				onClicked: manager.send_command("lie")
+				onClicked: manager.sendCommand("lie")
 			}	
 		}
 		RowLayout {
@@ -168,12 +168,12 @@ Rectangle {
 			CustomButton {
 				id: "emote1Button"
 				text: "Emote 1"
-				onClicked: manager.send_command("emote1")
+				onClicked: manager.sendCommand("emote1")
 			}
 			CustomButton {
 				id: "emote2Button"
 				text: "Emote 2"
-				onClicked: manager.send_command("emote2")
+				onClicked: manager.sendCommand("emote2")
 			}		
 		}
 		RowLayout {
@@ -182,18 +182,18 @@ Rectangle {
 			CustomButton {
 				id: "emote3Button"
 				text: "Emote 3"
-				onClicked: manager.send_command("emote3")
+				onClicked: manager.sendCommand("emote3")
 			}
 			CustomButton {
 				id: "emote4Button"
 				text: "Emote 4"
-				onClicked: manager.send_command("emote4")
+				onClicked: manager.sendCommand("emote4")
 			}
 		}
 		CustomButton {
 			id: "offRoadWalkButton"
 			text: "Off Road"
-			onClicked: manager.send_command("off road")
+			onClicked: manager.sendCommand("off road")
 			Layout.alignment: Qt.AlignHCenter
 		}
 		ColumnLayout {
@@ -209,32 +209,32 @@ Rectangle {
 				ArrowButton {
 					id: "counterclockwiseButton"
 					text: String.fromCodePoint(0x21BA)
-					onClicked: manager.send_command("counterclockwise")
+					onClicked: manager.sendCommand("counterclockwise")
 				}
 				ArrowButton {
 					id: "forwardButton"
 					text: String.fromCodePoint(0x2191)
-					onClicked: manager.send_command("forward")
+					onClicked: manager.sendCommand("forward")
 				}
 				ArrowButton {
 					id: "clockwiseButton"
 					text: String.fromCodePoint(0x21BB)
-					onClicked: manager.send_command("clockwise")
+					onClicked: manager.sendCommand("clockwise")
 				}	
 				ArrowButton {
 					id: "leftButton"
 					text: String.fromCodePoint(0x2190)
-					onClicked: manager.send_command("left")
+					onClicked: manager.sendCommand("left")
 				}
 				ArrowButton {
 					id: "backwardButton"
 					text: String.fromCodePoint(0x2193)
-					onClicked: manager.send_command("backward")
+					onClicked: manager.sendCommand("backward")
 				}
 				ArrowButton {
 					id: "rightButton"
 					text: String.fromCodePoint(0x2192)
-					onClicked: manager.send_command("right")
+					onClicked: manager.sendCommand("right")
 				}
 			}
 			ColumnLayout {
@@ -248,7 +248,7 @@ Rectangle {
 					Layout.fillWidth: true
 					from: -1
 					to: 1
-					onMoved: manager.update_steering(steeringSlider.value)
+					onMoved: manager.updateSteering(steeringSlider.value)
 				}
 				CustomText {
 					text: "Speed:"	
@@ -260,7 +260,7 @@ Rectangle {
 					initialValue: 1
 					from: 0.5
 					to: 2
-					onMoved: manager.update_speed(speedSlider.value)
+					onMoved: manager.updateSpeed(speedSlider.value)
 				}				
 			}
 			ToggleButton {

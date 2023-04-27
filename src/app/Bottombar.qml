@@ -104,13 +104,13 @@ Item {
 				}
 				CustomText {
 					text: "No Signal"
-					visible: !manager.connected || !manager.gps_signal
+					visible: !manager.connected || !manager.gpsSignal
 					size: 24
 					Layout.alignment: Qt.AlignHCenter
 				}
 				ColumnLayout {
 					Layout.alignment: Qt.AlignHCenter
-					visible: manager.connected && manager.gps_signal
+					visible: manager.connected && manager.gpsSignal
 					CustomText {
 						text: qsTr("Lat: ") + manager.lat.toFixed(2) + String.fromCodePoint(0x00B0)
 						size: 24

@@ -49,7 +49,7 @@ Rectangle {
 				Layout.alignment: Qt.AlignVCenter
 				id: connectButton
 				text: !manager.connected ? "Connect" : "Disconnect"
-				onClicked: { rootLayout.focus = true; textField.focus = false; manager.establish_connection(textField.text); }
+				onClicked: { rootLayout.focus = true; textField.focus = false; manager.establishConnection(textField.text); }
 			}
 		}
 	}

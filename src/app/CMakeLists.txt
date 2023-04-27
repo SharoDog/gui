@@ -1,6 +1,6 @@
 add_executable(sharo_gui main.cpp)
 
-target_link_libraries(sharo_gui PRIVATE Qt6::Gui Qt6::Quick)
+target_link_libraries(sharo_gui PRIVATE manager communication asio Qt6::Gui Qt6::Quick)
 qt_policy(
 	SET QTP0001 NEW
 )
