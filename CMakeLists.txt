@@ -9,7 +9,7 @@ find_package(Qt6 6.5 COMPONENTS Quick Gui REQUIRED )
 qt_standard_project_setup()
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-add_subdirectory(deps/asio)
+add_subdirectory(deps)
 add_subdirectory(src/app)
 add_subdirectory(src/manager)
 add_subdirectory(src/communication)
