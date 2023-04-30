@@ -266,7 +266,7 @@ Rectangle {
 			ToggleButton {
 				id: "sensorsButton"
 				text: "Sensors"
-				onClicked: manager.toggle_sensors(sensorsButton.pressed)
+				onClicked: manager.toggleSensors(sensorsButton.pressed)
 				Layout.alignment: Qt.AlignHCenter
 			}
 		}

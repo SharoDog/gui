@@ -7,26 +7,28 @@ class Manager : public QObject {
   Q_OBJECT
   Q_PROPERTY(bool loading READ loading WRITE setLoading NOTIFY loadingChanged)
   Q_PROPERTY(
-      bool connected READ connected WRITE connected NOTIFY connectedChanged)
+      bool connected READ connected WRITE setConnected NOTIFY connectedChanged)
   Q_PROPERTY(
       QString command READ command WRITE setCommand NOTIFY commandChanged)
   Q_PROPERTY(
-      bool gpsSignal READ gpsSignal WRITE gpsSignal NOTIFY gpsSignalChanged)
+      bool gpsSignal READ gpsSignal WRITE setGpsSignal NOTIFY gpsSignalChanged)
+  Q_PROPERTY(bool attData READ attData WRITE setAttData NOTIFY attDataChanged)
   Q_PROPERTY(
-      double steering READ steering WRITE steering NOTIFY steeringChanged)
-  Q_PROPERTY(double speed READ speed WRITE speed NOTIFY speedChanged)
-  Q_PROPERTY(double heading READ heading WRITE heading NOTIFY headingChanged)
-  Q_PROPERTY(double pitch READ pitch WRITE pitch NOTIFY pitchChanged)
-  Q_PROPERTY(double roll READ roll WRITE roll NOTIFY rollChanged)
-  Q_PROPERTY(double lat READ lat WRITE lat NOTIFY latChanged)
-  Q_PROPERTY(double lon READ lon WRITE lon NOTIFY lonChanged)
-  Q_PROPERTY(double alt READ alt WRITE alt NOTIFY altChanged)
+      double steering READ steering WRITE setSteering NOTIFY steeringChanged)
+  Q_PROPERTY(double speed READ speed WRITE setSpeed NOTIFY speedChanged)
+  Q_PROPERTY(double heading READ heading WRITE setHeading NOTIFY headingChanged)
+  Q_PROPERTY(double pitch READ pitch WRITE setPitch NOTIFY pitchChanged)
+  Q_PROPERTY(double roll READ roll WRITE setRoll NOTIFY rollChanged)
+  Q_PROPERTY(double lat READ lat WRITE setLat NOTIFY latChanged)
+  Q_PROPERTY(double lon READ lon WRITE setLon NOTIFY lonChanged)
+  Q_PROPERTY(double alt READ alt WRITE setAlt NOTIFY altChanged)
 private:
   Communication _communication;
   bool _loading;
   bool _connected;
   std::string _command;
   bool _gpsSignal;
+  bool _attData;
   double _steering;
   double _speed;
   double _heading;
@@ -35,34 +37,38 @@ private:
   double _lat;
   double _lon;
   double _alt;
+  std::vector<double> parseSensorData(std::string);
 
 public:
   explicit Manager(QObject *parent = nullptr);
   ~Manager();
+  void setDefault();
   bool loading() const;
   void setLoading(bool);
   bool connected() const;
-  void connected(bool);
+  void setConnected(bool);
   QString command() const;
   void setCommand(const QString &);
   bool gpsSignal() const;
-  void gpsSignal(bool);
+  void setGpsSignal(bool);
+  bool attData() const;
+  void setAttData(bool);
   double steering() const;
-  void steering(double);
+  void setSteering(double);
   double speed() const;
-  void speed(double);
+  void setSpeed(double);
   double heading() const;
-  void heading(double);
+  void setHeading(double);
   double pitch() const;
-  void pitch(double);
+  void setPitch(double);
   double roll() const;
-  void roll(double);
+  void setRoll(double);
   double lat() const;
-  void lat(double);
+  void setLat(double);
   double lon() const;
-  void lon(double);
+  void setLon(double);
   double alt() const;
-  void alt(double);
+  void setAlt(double);
 public slots:
   void establishConnection(const QString &);
   void toggleSensors(bool);
@@ -75,6 +81,7 @@ signals:
   void connectedChanged(bool);
   void commandChanged(QString);
   void gpsSignalChanged(bool);
+  void attDataChanged(bool);
   void steeringChanged(double);
   void speedChanged(double);
   void headingChanged(double);

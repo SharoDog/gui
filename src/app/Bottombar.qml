@@ -27,13 +27,13 @@ Item {
 				}
 				CustomText {
 					text: "No Data"
-					visible: !manager.connected
+					visible: !manager.connected || !manager.attData
 					size: 24
 					Layout.alignment: Qt.AlignHCenter
 				}
 				ColumnLayout {
 					Layout.alignment: Qt.AlignHCenter
-					visible: manager.connected
+					visible: manager.connected && manager.attData
 					CustomText {
 						visible: false
 						text: qsTr("Heading: ") + manager.heading.toFixed(2) + String.fromCodePoint(0x00B0)

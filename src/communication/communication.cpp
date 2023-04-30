@@ -60,7 +60,8 @@ void Communication::run() {
 
 std::string
 Communication::_read(std::unique_ptr<asio::ip::tcp::socket> &socket) {
-  asio::streambuf buf;
-  asio::read_until(*socket, buf, "\r\n");
-  return asio::buffer_cast<const char *>(buf.data());
+  auto n = asio::read_until(*socket, asio::dynamic_buffer(_buf), "\r\n");
+  auto msg = _buf.substr(0, n - 2);
+  _buf.erase(0, n);
+  return msg;
 }

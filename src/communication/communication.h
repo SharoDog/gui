@@ -11,6 +11,7 @@ private:
   std::unique_ptr<asio::ip::tcp::socket> _socket;
   asio::io_context _io_context;
   asio::ip::tcp::endpoint _addr;
+  std::string _buf;
   std::string _read(std::unique_ptr<asio::ip::tcp::socket> &_socket);
 
 public:
