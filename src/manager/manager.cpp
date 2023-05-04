@@ -1,19 +1,15 @@
 #include "manager.h"
 #include <iostream>
 
-Manager::Manager(QObject *parent) : QObject(parent), _communication() {
+Manager::Manager(QObject *parent) : QObject(parent), _communication(parent) {
   connect(&_communication, &Communication::managerSignal, this,
           &Manager::commsSlot);
   connect(this, &Manager::commsSignal, &_communication,
           &Communication::managerSlot);
   setDefault();
 }
-Manager::~Manager() {
-  _communication.setQuitFlag(true);
-  _communication.wait();
-}
+Manager::~Manager() { std::cout << "Quiting communications..." << std::endl; }
 void Manager::setDefault() {
-  _communication.start();
   _loading = false;
   _connected = false;
   _command = "lie";

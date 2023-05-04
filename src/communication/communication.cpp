@@ -1,67 +1,60 @@
 #include "communication.h"
-#include <iostream>
 
-Communication::Communication() : QThread(), _io_context() {}
-
-void Communication::setQuitFlag(bool value) { _quitFlag = value; }
+Communication::Communication(QObject *parent) : QObject(parent), _socket() {
+  connect(&_socket, &QTcpSocket::readyRead, this,
+          &Communication::readFromSocket);
+}
 
 void Communication::managerSlot(std::string msg) {
-  try {
-    std::string connStr = "connect: ";
-    if (msg.starts_with(connStr)) {
-      _addr = asio::ip::tcp::endpoint(
-          asio::ip::address::from_string(msg.erase(0, connStr.length())), 5000);
-      if (!_socket) {
-        _socket = std::unique_ptr<asio::ip::tcp::socket>(
-            new asio::ip::tcp::socket(_io_context));
-      }
-      _socket->connect(_addr);
-      emit managerSignal("success");
-    } else if (msg.compare("disconnect") == 0) {
-      _socket->close();
-      _socket.reset();
+  std::string connStr = "connect: ";
+  if (msg.starts_with(connStr)) {
+    _socket.connectToHost(
+        QHostAddress(QString::fromStdString(msg.erase(0, connStr.length()))),
+        5000);
+    if (_socket.waitForConnected(300)) {
       emit managerSignal("success");
     } else {
-      if (_socket) {
-        _socket->send(asio::buffer(msg));
-      }
-    }
-  } catch (...) {
-    emit managerSignal("fail");
-  }
-}
-
-void Communication::run() {
-  while (true) {
-    if (_quitFlag) {
-      if (_socket) {
-        _socket->close();
-        _socket.reset();
-      }
-      return;
-    }
-    try {
-      if (_socket) {
-        try {
-          std::string msg = _read(_socket);
-          emit managerSignal(msg);
-        } catch (...) {
-        }
-      }
-    } catch (...) {
-      if (_socket) {
-        _socket->close();
-        _socket.reset();
-      }
       emit managerSignal("fail");
     }
+  } else if (msg.compare("disconnect") == 0) {
+    _socket.abort();
+    emit managerSignal("success");
+  } else {
+    if (_socket.isWritable()) {
+      _socket.write(msg.c_str());
+    }
   }
 }
 
-std::string
-Communication::_read(std::unique_ptr<asio::ip::tcp::socket> &socket) {
-  auto n = asio::read_until(*socket, asio::dynamic_buffer(_buf), "\r\n");
-  auto msg = _buf.substr(0, n - 2);
-  _buf.erase(0, n);
-  return msg;
+void Communication::readFromSocket() {
+  _readToBuf();
+  _extractMsgs();
+}
+
+void Communication::_readToBuf() {
+  int bytesRead = _socket.read(_tempBuf, 1024);
+  // error
+  if (bytesRead == -1) {
+    emit managerSignal("fail");
+    return;
+  }
+  for (int i = 0; i < bytesRead; ++i) {
+    _buf[(i + _endBuf) % _bufSize] = _tempBuf[i];
+  }
+  _endBuf = (_endBuf + bytesRead) % _bufSize;
+}
+
+void Communication::_extractMsgs() {
+  std::string msg;
+  for (int i = _startBuf; i != _endBuf; i = (i + 1) % _bufSize) {
+    if (_buf[(i) % _bufSize] == '\r' && _buf[(i + 1) % _bufSize] == '\n') {
+      emit managerSignal(msg);
+      msg.clear();
+      // move start of buffer to next byte
+      _startBuf = (i + 2) % _bufSize;
+    }
+    if (_buf[i] != '\r' && _buf[i] != '\n') {
+      msg += _buf[i];
+    }
+  }
 }
