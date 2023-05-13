@@ -7,11 +7,6 @@ import QtMultimedia 6.5
 Rectangle {
 	id: video
 	color: root.bg_color
-	border.color: root.border_color
-	border.width: videoMouse.hovered ? 3 : 1
-	Layout.preferredWidth: 1
-	Layout.fillWidth: true
-	Layout.fillHeight: true
 	HoverHandler {
 		id: videoMouse
 		cursorShape: Qt.CrossCursor

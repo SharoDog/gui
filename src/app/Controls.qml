@@ -5,11 +5,6 @@ import QtQuick.Layouts 6.5
 Rectangle {
 	id: controls
 	color: bg_color
-	border.color: root.border_color
-	border.width: controlsMouse.hovered ? 3 : 1
-	Layout.preferredWidth: 1
-	Layout.fillWidth: true
-	Layout.fillHeight: true
 	HoverHandler {
 		id: controlsMouse
 	}	

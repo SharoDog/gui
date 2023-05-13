@@ -3,16 +3,17 @@ import QtQuick.Controls 6.5
 import QtQuick.Layouts 6.5
 
 Item {
-	RowLayout {
+	SplitView {
 		spacing: 0
+		 handle: Separator {
+			 horizontal: false
+		 }
 		anchors.fill: parent
 		Rectangle {
 			id: left
 			color: root.bg_color
-			Layout.preferredWidth: parent.width / 3
-			Layout.preferredHeight: parent.height
-			border.color: root.border_color
-			border.width: leftMouse.hovered ? 3 : 1
+			SplitView.preferredWidth: parent.width / 3
+			SplitView.fillHeight: true
 			HoverHandler {
 				id: leftMouse
 			}
@@ -53,10 +54,9 @@ Item {
 		Rectangle {
 			id: mid
 			color: root.bg_color
-			Layout.preferredWidth: parent.width / 3
-			Layout.preferredHeight: parent.height
-			border.color: root.border_color
-			border.width: midMouse.hovered ? 3 : 1
+			SplitView.preferredWidth: parent.width / 3
+			SplitView.fillWidth: true
+			SplitView.fillHeight: true
 			HoverHandler {
 				id: midMouse
 			}
@@ -86,10 +86,8 @@ Item {
 		Rectangle {
 			id: right
 			color: root.bg_color
-			Layout.preferredWidth: parent.width / 3
-			Layout.preferredHeight: parent.height
-			border.color: root.border_color
-			border.width: rightMouse.hovered ? 3 : 1
+			SplitView.preferredWidth: parent.width / 3
+			SplitView.fillHeight: true
 			HoverHandler {
 				id: rightMouse
 			}

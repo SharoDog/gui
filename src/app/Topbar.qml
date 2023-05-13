@@ -4,9 +4,7 @@ import QtQuick.Layouts 6.5
 	
 Rectangle {
 	id: ip
-	color: bg_color
-	border.color: root.border_color
-	border.width: ipHoverHandler.hovered ? 3 : 1
+	color: root.bg_color
 	HoverHandler {
 		id: ipHoverHandler
 	}
