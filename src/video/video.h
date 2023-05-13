@@ -14,7 +14,7 @@ class ImageProvider : public QQuickImageProvider {
   Q_OBJECT
 private:
   QUdpSocket _socket;
-  std::shared_ptr<QImage> _image;
+  std::unique_ptr<QImage> _image;
   cv::Ptr<cv::FaceDetectorYN> _faceDetector;
 
 public:
@@ -22,9 +22,8 @@ public:
   ~ImageProvider();
   QImage requestImage(const QString &, QSize *, const QSize &);
 public slots:
-  void updateImage(std::shared_ptr<QImage>);
   void processDatagrams();
 signals:
-  void imageChanged(std::shared_ptr<QImage>);
+  void imageChanged(const QImage &);
 };
 #endif

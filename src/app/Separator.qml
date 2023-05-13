@@ -6,7 +6,7 @@ Rectangle {
 	id: handle
 	implicitWidth: 4
 	implicitHeight: 4
-	color: SplitHandle.pressed ? root.fg_darker_color
+	color: SplitHandle.pressed ? Qt.darker(root.fg_color)
 		: (SplitHandle.hovered ? Qt.darker(root.fg_color) : root.fg_color)
 	containmentMask: Item {
 		width: handle.width * (horizontal ? 1 : 5)

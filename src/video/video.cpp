@@ -15,6 +15,8 @@ ImageProvider::~ImageProvider() {
 }
 
 void ImageProvider::processDatagrams() {
+  // delete previous image
+  _image.reset();
   // get only last datagram
   std::vector<char> datagram;
   while (_socket.hasPendingDatagrams()) {
@@ -37,13 +39,9 @@ void ImageProvider::processDatagrams() {
                 cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(0, 255, 0),
                 lineThickness, cv::LINE_AA);
   }
-  updateImage(std::make_shared<QImage>(
-      QImage(frame.data, frame.cols, frame.rows, QImage::Format_RGB888)));
-}
-
-void ImageProvider::updateImage(std::shared_ptr<QImage> img) {
-  emit imageChanged(img);
-  _image = img;
+  _image = std::make_unique<QImage>(
+      QImage(frame.data, frame.cols, frame.rows, QImage::Format_RGB888));
+  emit imageChanged(*_image);
 }
 
 QImage ImageProvider::requestImage(const QString &id, QSize *size,

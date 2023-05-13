@@ -26,7 +26,7 @@ Item {
 				implicitWidth: parent.width
 				implicitHeight: 10
 				radius: 2
-				color: root.fg_darker_color
+				color: Qt.darker(root.fg_color)
 
 				Rectangle {
 					width: control.visualPosition * parent.width
