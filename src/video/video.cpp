@@ -2,8 +2,14 @@
 
 ImageProvider::ImageProvider()
     : QQuickImageProvider(QQuickImageProvider::Image), _socket(),
-      _faceDetector(
-          cv::FaceDetectorYN::create("yunet.onnx", "", cv::Size(640, 480))) {
+      _picturesPaths(
+          QStandardPaths::standardLocations(QStandardPaths::PicturesLocation) +
+          QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation) +
+          QStandardPaths::standardLocations(QStandardPaths::HomeLocation)),
+      _videosPaths(
+          QStandardPaths::standardLocations(QStandardPaths::PicturesLocation) +
+          QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation) +
+          QStandardPaths::standardLocations(QStandardPaths::HomeLocation)) {
   _socket.bind(QHostAddress::Any, 9999);
   connect(&_socket, &QUdpSocket::readyRead, this,
           &ImageProvider::processDatagrams);
@@ -38,5 +44,32 @@ QImage ImageProvider::requestImage(const QString &id, QSize *size,
         std::make_unique<QImage>(QImage(320, 240, QImage::Format_RGBA8888));
     img->fill(Qt::black);
     return *img;
+  }
+}
+
+void ImageProvider::takePicture() {
+  if (_image) {
+    for (QString path : _picturesPaths) {
+      QDir directory(path);
+      // create directory if not exists
+      if (!directory.exists()) {
+        directory.mkpath(".");
+      }
+      if (!directory.cd("Sharo")) {
+        directory.mkdir("Sharo");
+        if (!directory.cd("Sharo")) {
+          continue;
+        }
+      }
+      // number files
+      int idx = 1;
+      while (directory.exists(QString("photo%1.jpg").arg(idx))) {
+        ++idx;
+      }
+      if (_image->save(directory.filePath(QString("photo%1.jpg").arg(idx)),
+                       "JPG", 75)) {
+        break;
+      }
+    }
   }
 }

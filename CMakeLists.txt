@@ -11,7 +11,6 @@ find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS})
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/yunet.onnx ${CMAKE_BINARY_DIR}/yunet.onnx COPYONLY)
 add_subdirectory(src/app)
 add_subdirectory(src/manager)
 add_subdirectory(src/communication)

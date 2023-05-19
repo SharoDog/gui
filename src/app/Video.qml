@@ -21,21 +21,36 @@ Rectangle {
 		font.pixelSize: 24
 		smooth: true
 	}    
-	Image {
-        id: feedImage
+	ColumnLayout {
 		visible: manager.connected
-        width: parent.width
-        height: parent.height
-        fillMode: Image.PreserveAspectFit
-        cache: false
-        source: "image://ImageProvider/img"
-        property bool counter: false
+		anchors.fill: parent
+		anchors.bottomMargin: 15
+		Image {
+			id: feedImage
+			Layout.fillWidth: true
+			Layout.fillHeight: true
+			fillMode: Image.PreserveAspectFit
+			cache: false
+			source: "image://ImageProvider/img"
+			property bool counter: false
 
-        function reloadImage() {
-            counter = !counter
-            source = "image://ImageProvider/img?id=" + counter
-        }
-    } 
+			function reloadImage() {
+				counter = !counter
+				source = "image://ImageProvider/img?id=" + counter
+			}
+		} 
+		RowLayout {
+			Layout.alignment: Qt.AlignHCenter
+			spacing: 10
+			CustomButton {
+				text: "Photo"
+				onClicked: imageProvider.takePicture()
+			}
+			ToggleButton {
+				text: "Record"
+			}
+		}
+	}
 
     Connections {
         target: imageProvider
