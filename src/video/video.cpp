@@ -7,7 +7,7 @@ ImageProvider::ImageProvider()
           QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation) +
           QStandardPaths::standardLocations(QStandardPaths::HomeLocation)),
       _videosPaths(
-          QStandardPaths::standardLocations(QStandardPaths::PicturesLocation) +
+          QStandardPaths::standardLocations(QStandardPaths::MoviesLocation) +
           QStandardPaths::standardLocations(QStandardPaths::DocumentsLocation) +
           QStandardPaths::standardLocations(QStandardPaths::HomeLocation)) {
   _socket.bind(QHostAddress::Any, 9999);
@@ -32,6 +32,12 @@ void ImageProvider::processDatagrams() {
   auto frame = cv::imdecode(datagram, cv::IMREAD_COLOR);
   _image = std::make_unique<QImage>(
       QImage(frame.data, frame.cols, frame.rows, QImage::Format_RGB888));
+  if (_recording) {
+    cv::Mat videoFrame;
+    cv::cvtColor(frame, videoFrame, cv::COLOR_BGR2RGB);
+    _recordedFrames.push_back(
+        std::make_pair(videoFrame, std::chrono::high_resolution_clock::now()));
+  }
   emit imageChanged(*_image);
 }
 
@@ -71,5 +77,62 @@ void ImageProvider::takePicture() {
         break;
       }
     }
+  }
+}
+
+void ImageProvider::toggleRecord(bool curr) {
+  if (!curr && !_recording) {
+    _recording = true;
+    _recordedFrames.clear();
+  }
+  if (curr && _recording) {
+    _recording = false;
+    auto videoWriter = cv::VideoWriter();
+    for (QString path : _videosPaths) {
+      QDir directory(path);
+      // create directory if not exists
+      if (!directory.exists()) {
+        directory.mkpath(".");
+      }
+      if (!directory.cd("Sharo")) {
+        directory.mkdir("Sharo");
+        if (!directory.cd("Sharo")) {
+          continue;
+        }
+      }
+      // number files
+      int idx = 1;
+      while (directory.exists(QString("recording%1.avi").arg(idx))) {
+        ++idx;
+      }
+      if (videoWriter.open(
+              directory.filePath(QString("recording%1.avi").arg(idx))
+                  .toStdString(),
+              cv::VideoWriter::fourcc('M', 'J', 'P', 'G'), FPS,
+              cv::Size(640, 480))) {
+        break;
+      }
+    }
+    auto start = _recordedFrames.front().second;
+    auto end = _recordedFrames.back().second;
+    auto length = std::chrono::duration<double>(end - start).count();
+    // number of output frames
+    auto n = length * FPS;
+    // real frames index
+    int idx = 0;
+    // output frames index
+    for (int i = 0; i < n; ++i) {
+      auto elapsed = (i / n) * length;
+      // choose next real frame
+      while (
+          idx < _recordedFrames.size() - 1 &&
+          std::chrono::duration<double>(_recordedFrames[idx + 1].second - start)
+                  .count() < elapsed) {
+        ++idx;
+      }
+      videoWriter.write(_recordedFrames[idx].first);
+    }
+    videoWriter.release();
+    _recordedFrames.clear();
   }
 }

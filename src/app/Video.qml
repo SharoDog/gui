@@ -47,7 +47,9 @@ Rectangle {
 				onClicked: imageProvider.takePicture()
 			}
 			ToggleButton {
+				id: videoButton
 				text: "Record"
+				onClicked: imageProvider.toggleRecord(videoButton.pressed)
 			}
 		}
 	}
