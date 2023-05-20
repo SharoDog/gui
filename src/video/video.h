@@ -9,8 +9,6 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/videoio.hpp>
 
-const double FPS = 30;
-
 class ImageProvider : public QQuickImageProvider {
   Q_OBJECT
 private:
@@ -18,9 +16,10 @@ private:
   QStringList _picturesPaths;
   QStringList _videosPaths;
   std::unique_ptr<QImage> _image;
-  bool _recording;
-  std::vector<std::pair<cv::Mat, std::chrono::system_clock::time_point>>
-      _recordedFrames;
+  const double FPS = 30;
+  std::chrono::system_clock::time_point _videoStart;
+  unsigned long _writtenFrames;
+  std::unique_ptr<cv::VideoWriter> _videoWriter;
 
 public:
   explicit ImageProvider();
