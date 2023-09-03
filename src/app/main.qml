@@ -33,8 +33,8 @@ ApplicationWindow {
 				horizontal: true
 			}
 			visible: !manager.loading
-			Keys.onPressed: (event) => controls.onKeyPressed(event)
-			Keys.onReleased: (event) => controls.onKeyReleased(event)
+			Keys.onPressed: (event) => main.onKeyPressed(event)
+			Keys.onReleased: (event) => main.onKeyReleased(event)
 			layer.enabled: true
 			layer.samples: 16
 			anchors.fill: parent			
@@ -58,13 +58,13 @@ ApplicationWindow {
 					SplitView.fillWidth: true
 					SplitView.fillHeight: true
 				}
-				Controls {
-					id: controls
+				Main {
+					id: main
 					SplitView.preferredWidth: parent.width / 2
 					SplitView.fillHeight: true
 				}
 			}
-			Bottombar {
+			BottomBar {
 				SplitView.preferredHeight: parent.height * 3 / 12
 				SplitView.fillWidth: true
 			}
