@@ -125,7 +125,7 @@ Rectangle {
 		visible: manager.connected
 		anchors.horizontalCenter: parent.horizontalCenter
 		anchors.verticalCenter: parent.verticalCenter
-		spacing: 20
+		spacing: 10
 		CustomText {
 			text: qsTr("Cmd: ") + manager.command
 			size: 24
