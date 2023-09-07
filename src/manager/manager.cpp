@@ -119,6 +119,14 @@ void Manager::updateSteering(double value) {
   commsSignal("steering: " + std::to_string(value));
 }
 
+QString Manager::openFile(const QUrl &filename) {
+  return _fileManager.openFile(filename.path());
+}
+
+void Manager::saveFile(const QUrl &filename, const QString &content) {
+  _fileManager.saveFile(filename.path(), content);
+}
+
 bool Manager::loading() const { return _loading; }
 bool Manager::connected() const { return _connected; }
 QString Manager::command() const { return QString::fromStdString(_command); }

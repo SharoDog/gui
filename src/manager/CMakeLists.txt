@@ -1,5 +1,6 @@
 add_library(manager STATIC
 	manager.cpp
+	FileManager.cpp
 )
 
 target_link_libraries(manager PRIVATE communication Qt6::Core Qt6::Network)

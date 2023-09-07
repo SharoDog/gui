@@ -1,6 +1,8 @@
 #ifndef MANAGER_H
 #define MANAGER_H
+#include "FileManager.h"
 #include <QObject>
+#include <QUrl>
 #include <communication.h>
 
 class Manager : public QObject {
@@ -24,6 +26,7 @@ class Manager : public QObject {
   Q_PROPERTY(double alt READ alt WRITE setAlt NOTIFY altChanged)
 private:
   Communication _communication;
+  FileManager _fileManager;
   bool _loading;
   bool _connected;
   std::string _command;
@@ -76,6 +79,8 @@ public slots:
   void updateSteering(double);
   void updateSpeed(double);
   void commsSlot(std::string);
+  QString openFile(const QUrl &);
+  void saveFile(const QUrl &, const QString &);
 signals:
   void loadingChanged(bool);
   void connectedChanged(bool);

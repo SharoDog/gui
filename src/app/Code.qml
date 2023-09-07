@@ -1,12 +1,10 @@
 import QtQuick 6.5
 import QtQuick.Controls 6.5
 import QtQuick.Layouts 6.5
+import QtQuick.Dialogs 6.5
 
-Pane {
+CustomPane {
 	id: code
-	background: Rectangle {
-		color: root.bg_color
-	}
 	focusPolicy: Qt.ClickFocus
 	ColumnLayout{
 		anchors.fill: parent
@@ -16,15 +14,41 @@ Pane {
 			spacing: 10
 			CustomButton {
 				text: "Save..."
-				onClicked: console.log("Saved")
+				onClicked: saveDialog.open()
 			}
 			CustomButton {
 				text: "Open..."
-				onClicked: console.log("Open")
+				onClicked: openDialog.open()
 			}
 			CustomButton {
 				text: "Run..."
+				visible: manager.connected
 				onClicked: console.log("Running")
+			}
+			CustomText {
+				text: "Not connected"
+				visible: !manager.connected
+			}
+		}	
+		FileDialog {
+			id: openDialog
+			title: "Choose a file"
+			nameFilters: ["Python (*.py)"]
+			onAccepted: {
+				input.text = manager.openFile(openDialog.selectedFile)
+				visible = false
+			}
+		}	
+		FileDialog {
+			id: saveDialog
+			title: "Save file"
+			acceptLabel: "Save"
+			fileMode: FileDialog.SaveFile
+			defaultSuffix: "py"
+			nameFilters: ["Python files (*.py)"]
+			onAccepted: {
+				manager.saveFile(saveDialog.selectedFile, input.text)
+				visible = false
 			}
 		}
 		ScrollView {
