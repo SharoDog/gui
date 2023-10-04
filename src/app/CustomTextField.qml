@@ -5,6 +5,7 @@ import QtQuick.Controls 6.5
 TextField {
 	id: "field"
 	color: root.fg_color
+	placeholderTextColor: Qt.tint(root.fg_color, "#48000000")
 	selectionColor: root.fg_color
 	selectedTextColor: root.bg_color
 	font.family: ethnocentric.font.family	

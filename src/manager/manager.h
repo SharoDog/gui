@@ -24,6 +24,7 @@ class Manager : public QObject {
   Q_PROPERTY(double lat READ lat WRITE setLat NOTIFY latChanged)
   Q_PROPERTY(double lon READ lon WRITE setLon NOTIFY lonChanged)
   Q_PROPERTY(double alt READ alt WRITE setAlt NOTIFY altChanged)
+  Q_PROPERTY(bool code READ code WRITE setCode NOTIFY codeChanged)
 private:
   Communication _communication;
   FileManager _fileManager;
@@ -40,6 +41,7 @@ private:
   double _lat;
   double _lon;
   double _alt;
+  bool _code;
   std::vector<double> parseSensorData(std::string);
 
 public:
@@ -72,6 +74,8 @@ public:
   void setLon(double);
   double alt() const;
   void setAlt(double);
+  bool code() const;
+  void setCode(bool);
 public slots:
   void establishConnection(const QString &);
   void toggleSensors(bool);
@@ -95,6 +99,7 @@ signals:
   void latChanged(double);
   void lonChanged(double);
   void altChanged(double);
+  void codeChanged(bool);
   void commsSignal(std::string);
 };
 #endif

@@ -13,17 +13,17 @@ CustomPane {
 		RowLayout {
 			spacing: 10
 			CustomButton {
-				text: "Save..."
+				text: "Save"
 				onClicked: saveDialog.open()
 			}
 			CustomButton {
-				text: "Open..."
+				text: "Open"
 				onClicked: openDialog.open()
 			}
 			CustomButton {
-				text: "Run..."
+				text: (manager.connected && manager.code) ? "Stop" : "Run"
 				visible: manager.connected
-				onClicked: console.log("Running")
+				onClicked: manager.code ? manager.sendCommand(qsTr("stand")) : manager.sendCommand(qsTr("code:") + input.text)
 			}
 			CustomText {
 				text: "Not connected"
@@ -60,8 +60,7 @@ CustomPane {
 				placeholderText: "# Write your code here or open an existing file"
 				placeholderTextColor: Qt.tint(root.fg_color, "#48000000")
 				color: root.fg_color
-				font.family: ethnocentric.font.family
-				font.pixelSize: 12
+				font.pixelSize: 14
 				smooth: true
 			}	
 			ScrollBar.vertical: ScrollBar {

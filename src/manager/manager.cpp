@@ -23,6 +23,7 @@ void Manager::setDefault() {
   _lat = 1.0;
   _lon = 1.0;
   _alt = 1.0;
+  _code = false;
   emit loadingChanged(_loading);
   emit connectedChanged(_connected);
   emit commandChanged(QString::fromStdString(_command));
@@ -36,6 +37,7 @@ void Manager::setDefault() {
   emit latChanged(_lat);
   emit lonChanged(_lon);
   emit altChanged(_alt);
+  emit codeChanged(_code);
 }
 void Manager::commsSlot(std::string msg) {
   std::string commStr = "command: ";
@@ -43,6 +45,8 @@ void Manager::commsSlot(std::string msg) {
   std::string speedStr = "speed: ";
   std::string imuStr = "IMU: ";
   std::string gpsStr = "GPS: ";
+  std::string codeStr = "code";
+  std::string codeStopStr = "codestop";
   if (msg == "success") {
     setConnected(!_connected);
     if (!_connected) {
@@ -92,6 +96,10 @@ void Manager::commsSlot(std::string msg) {
       setAlt(oldAlt);
       setGpsSignal(false);
     }
+  } else if (msg == codeStr) {
+    setCode(true);
+  } else if (msg == codeStopStr) {
+    setCode(false);
   }
 }
 
@@ -140,6 +148,7 @@ double Manager::roll() const { return _roll; }
 double Manager::lat() const { return _lat; }
 double Manager::lon() const { return _lon; }
 double Manager::alt() const { return _alt; }
+bool Manager::code() const { return _code; }
 
 void Manager::setLoading(bool value) {
   if (_loading != value) {
@@ -219,6 +228,13 @@ void Manager::setAlt(double value) {
   if (_alt != value) {
     _alt = value;
     emit altChanged(_alt);
+  }
+}
+
+void Manager::setCode(bool value) {
+  if (_code != value) {
+    _code = value;
+    emit codeChanged(_code);
   }
 }
 
