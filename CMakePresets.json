@@ -1,0 +1,33 @@
+{
+	"version": 6,
+	"cmakeMinimumRequired": {
+		"major": 3,
+		"minor": 21,
+		"patch": 0
+	},
+	"configurePresets": [
+		{
+			"name": "android",
+			"toolchainFile": "/opt/android-sdk/ndk/25.1.8937393/build/cmake/android.toolchain.cmake",
+			"cacheVariables": {
+				"ANDROID_SDK_ROOT": "/opt/android-sdk",
+				"ANDROID_NDK_ROOT": "/opt/android-sdk/ndk/25.1.8937393",
+				"ANDROID_ABI": "armeabi-v7a",
+				"ANDROID_PLATFORM": "23",
+				"CMAKE_FIND_ROOT_PATH_MODE_PACKAGE": "BOTH",
+				"QT_HOST_PATH": "/opt/qt/6.6.0/gcc_64"
+			},
+			"environment": {
+				"CMAKE_PREFIX_PATH": "/opt/qt/6.6.0/android_armv7"
+			},
+			"binaryDir": "${sourceDir}/build_android"
+		},
+		{
+			"name": "desktop",
+			"environment": {
+				"CMAKE_PREFIX_PATH": "/opt/qt/6.6.0/gcc_64"
+			},
+			"binaryDir": "${sourceDir}/build"
+		}
+	]
+}
