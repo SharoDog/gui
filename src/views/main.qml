@@ -1,6 +1,6 @@
-import QtQuick 6.5
-import QtQuick.Controls 6.5
-import QtQuick.Layouts 6.5
+import QtQuick 6.6
+import QtQuick.Controls 6.6
+import QtQuick.Layouts 6.6
 
 ApplicationWindow {
 	id: root
@@ -14,6 +14,7 @@ ApplicationWindow {
 	property color cool_color: "#BF4E00"
 	property color border_color: "#FF6A00"
 	property int border_width: 3
+	property bool vertical: root.width < root.height
 	FontLoader {
 		id: ethnocentric
 		source: "ethnocentric.otf"
@@ -33,8 +34,6 @@ ApplicationWindow {
 				horizontal: true
 			}
 			visible: !manager.loading
-			Keys.onPressed: (event) => main.onKeyPressed(event)
-			Keys.onReleased: (event) => main.onKeyReleased(event)
 			layer.enabled: true
 			layer.samples: 16
 			anchors.fill: parent			
@@ -42,14 +41,19 @@ ApplicationWindow {
 			spacing: 0
 			Topbar {
 				SplitView.preferredHeight: parent.height / 12
+				SplitView.minimumHeight: 60
+				SplitView.maximumHeight: 80
 				SplitView.fillWidth: true
 			}
-			Main {
-				id: main
+			Loader {
+				id: mainLoader
+				SplitView.preferredHeight: parent.height * 8 / 12
 				SplitView.fillWidth: true
 				SplitView.fillHeight: true
+				source: (Qt.platform.os == "android") ? "Android.qml" : "Desktop.qml"
 			}
 			BottomBar {
+				// visible: Qt.platform.os != "android"
 				SplitView.preferredHeight: parent.height * 3 / 12
 				SplitView.fillWidth: true
 			}

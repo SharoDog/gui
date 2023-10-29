@@ -1,24 +1,23 @@
-import QtQuick 6.5
-import QtQuick.Shapes 6.5
-import QtQuick.Controls 6.5
+import QtQuick 6.6
+import QtQuick.Shapes 6.6
+import QtQuick.Controls 6.6
 
 Shape {
 	id: "button"
 	property alias text: content.text
+	property alias pixelSize: content.font.pixelSize
 	property bool pressed: false
 	signal clicked
-	Text {
+	CustomText {
 		anchors.verticalCenter: parent.verticalCenter
 		anchors.horizontalCenter: parent.horizontalCenter
 		id: "content"
 		text: "Text"
 		color: button.pressed ? root.bg_color : root.fg_color
-		font.family: ethnocentric.font.family
-		font.pixelSize: 24
-		smooth: true
+		verticalAlignment: Text.AlignVCenter
 	}
-	height: content.contentHeight + 4
-	width: content.contentWidth + button.height / 2
+	height: content.contentHeight * 3 / 2
+	width: content.contentWidth + content.contentHeight * 3 / 4
 	ShapePath {
 		strokeWidth: 3
 		strokeColor: root.border_color

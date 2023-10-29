@@ -128,15 +128,15 @@ Rectangle {
 		spacing: 10
 		CustomText {
 			text: qsTr("Cmd: ") + manager.command
-			size: 24
+			font.pixelSize: 24
 		}
 		CustomText {
 			text: qsTr("Steering: ") + manager.steering.toFixed(2)
-			size: 24
+			font.pixelSize: 24
 		}
 		CustomText {
 			text: qsTr("Speed: ") + manager.speed.toFixed(2)
-			size: 24
+			font.pixelSize: 24
 		}
 		RowLayout {
 			spacing: 10
@@ -236,7 +236,7 @@ Rectangle {
 				Layout.fillWidth: true
 				CustomText {
 					text: "Steering:"	
-					size: 20
+					font.pixelSize: 20
 				}
 				CustomSlider {
 					id: steeringSlider
@@ -247,7 +247,7 @@ Rectangle {
 				}
 				CustomText {
 					text: "Speed:"	
-					size: 20
+					font.pixelSize: 20
 				}
 				CustomSlider {
 					id: speedSlider

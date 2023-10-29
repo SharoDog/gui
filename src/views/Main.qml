@@ -1,15 +1,16 @@
-import QtQuick 6.5
-import QtQuick.Controls 6.5
-import QtQuick.Layouts 6.5
+import QtQuick 6.6
+import QtQuick.Controls 6.6
+import QtQuick.Layouts 6.6
 
 ColumnLayout {
 	id: main
-	function onKeyPressed(event) { 
+	focus: true
+	Keys.onPressed: (event) => {
 		if (tabbar.currentIndex == 0) {
 			controlsTab.onKeyPressed(event);	
 		}
 	}
-	function onKeyReleased(event) { 
+	Keys.onReleased: (event) => {
 		if (tabbar.currentIndex == 0) {
 			controlsTab.onKeyReleased(event);	
 		}
@@ -20,7 +21,7 @@ ColumnLayout {
 		Layout.fillWidth: true	
 		model: ["Controls", "Code", "Blocks"]				
 		onCurrentIndexChanged: {
-			parent.parent.forceActiveFocus()
+			parent.forceActiveFocus()
 		}
 	}
 	StackLayout {

@@ -11,6 +11,7 @@ TextField {
 	font.family: ethnocentric.font.family	
 	font.pixelSize: 24
 	text: "10.42.0.1"
+	verticalAlignment: Text.AlignVCenter
 	leftPadding: field.height / 4
 	topPadding: 2
 	bottomPadding: 2

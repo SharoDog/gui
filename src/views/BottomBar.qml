@@ -23,13 +23,13 @@ Item {
 				anchors.verticalCenter: parent.verticalCenter
 				CustomText {
 					text: "Attitude"
-					size: 36
+					font.pixelSize: 36
 					Layout.alignment: Qt.AlignHCenter
 				}
 				CustomText {
 					text: "No Data"
 					visible: !manager.connected || !manager.attData
-					size: 24
+					font.pixelSize: 24
 					Layout.alignment: Qt.AlignHCenter
 				}
 				ColumnLayout {
@@ -38,15 +38,15 @@ Item {
 					CustomText {
 						visible: false
 						text: qsTr("Heading: ") + manager.heading.toFixed(2) + String.fromCodePoint(0x00B0)
-						size: 24
+						font.pixelSize: 24
 					}
 					CustomText {
 						text: qsTr("Pitch:      ") + manager.pitch.toFixed(2) + String.fromCodePoint(0x00B0)
-						size: 24
+						font.pixelSize: 24
 					}
 					CustomText {
 						text: qsTr("Roll:       ") + manager.roll.toFixed(2) + String.fromCodePoint(0x00B0)
-						size: 24
+						font.pixelSize: 24
 					}								
 				}
 			}
@@ -97,13 +97,13 @@ Item {
 				anchors.verticalCenter: parent.verticalCenter
 				CustomText {
 					text: "GPS"
-					size: 36
+					font.pixelSize: 36
 					Layout.alignment: Qt.AlignHCenter
 				}
 				CustomText {
 					text: "No Signal"
 					visible: !manager.connected || !manager.gpsSignal
-					size: 24
+					font.pixelSize: 24
 					Layout.alignment: Qt.AlignHCenter
 				}
 				ColumnLayout {
@@ -111,15 +111,15 @@ Item {
 					visible: manager.connected && manager.gpsSignal
 					CustomText {
 						text: qsTr("Lat: ") + manager.lat.toFixed(2) + String.fromCodePoint(0x00B0)
-						size: 24
+						font.pixelSize: 24
 					}
 					CustomText {
 						text: qsTr("Lon: ") + manager.lon.toFixed(2) + String.fromCodePoint(0x00B0)
-						size: 24
+						font.pixelSize: 24
 					}
 					CustomText {
 						text: qsTr("Alt: ") + manager.alt.toFixed(2) + qsTr("m")
-						size: 24
+						font.pixelSize: 24
 					}								
 				}						
 			}

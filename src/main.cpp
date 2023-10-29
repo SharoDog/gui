@@ -17,10 +17,8 @@ int main(int argc, char **argv) {
   ImageProvider *imageProvider = new ImageProvider();
   engine.rootContext()->setContextProperty("imageProvider", imageProvider);
   engine.addImageProvider("imageProvider", imageProvider);
-  const QUrl url(u"qrc:qt/qml/views/desktop.qml"_qs);
-#else
-  const QUrl url(u"qrc:qt/qml/views/android.qml"_qs);
 #endif
+  const QUrl url(u"qrc:qt/qml/views/main.qml"_qs);
   engine.load(url);
   if (engine.rootObjects().isEmpty()) {
     return -1;
