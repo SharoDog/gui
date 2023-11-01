@@ -8,7 +8,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-find_package(Qt6 6.6.0 COMPONENTS Quick Gui Network REQUIRED)
+find_package(Qt6 6.6.0 COMPONENTS Quick Gui Network WebView REQUIRED)
 set(QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/android")
 
 qt_standard_project_setup(REQUIRES 6.6)
@@ -40,4 +40,4 @@ add_subdirectory(src/views)
 add_subdirectory(src/manager)
 add_subdirectory(src/communication)
 
-target_link_libraries(sharo_gui PRIVATE viewsplugin manager communication Qt6::Gui Qt6::Quick Qt6::Network)
+target_link_libraries(sharo_gui PRIVATE viewsplugin manager communication Qt6::Gui Qt6::Quick Qt6::Network Qt6::WebView)

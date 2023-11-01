@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQmlEngine>
+#include <QtWebView/QtWebView>
 
 #include <manager.h>
 #ifndef __ANDROID__
@@ -9,6 +10,7 @@
 #endif
 
 int main(int argc, char **argv) {
+  QtWebView::initialize();
   QGuiApplication app(argc, argv);
   QQmlApplicationEngine engine;
   Manager *manager = new Manager(&app);
@@ -18,7 +20,8 @@ int main(int argc, char **argv) {
   engine.rootContext()->setContextProperty("imageProvider", imageProvider);
   engine.addImageProvider("imageProvider", imageProvider);
 #endif
-  const QUrl url(u"qrc:qt/qml/views/main.qml"_qs);
+  engine.addImportPath(":/sharo/imports");
+  const QUrl url(u"qrc:/sharo/imports/views/main.qml"_qs);
   engine.load(url);
   if (engine.rootObjects().isEmpty()) {
     return -1;

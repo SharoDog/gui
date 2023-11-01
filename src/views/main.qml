@@ -17,7 +17,7 @@ ApplicationWindow {
 	property bool vertical: root.width < root.height
 	FontLoader {
 		id: ethnocentric
-		source: "ethnocentric.otf"
+		source: "qrc:/sharo/imports/views/ethnocentric.otf"
 	}
 	Loading {
 		visible: manager.loading

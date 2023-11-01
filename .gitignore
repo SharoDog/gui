@@ -11,3 +11,5 @@ compile_commands.json
 CTestTestfile.cmake
 _deps
 build/
+src/views/blocks/node_modules
+src/views/blocks/dist
