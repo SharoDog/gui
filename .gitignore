@@ -7,9 +7,11 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 compile_commands.json
+.cache/
 .ccls-cache/
 CTestTestfile.cmake
 _deps
 build/
+build2/
 src/views/blocks/node_modules
 src/views/blocks/dist
