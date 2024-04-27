@@ -15,6 +15,25 @@ ApplicationWindow {
 	property color border_color: "#FF6A00"
 	property int border_width: 3
 	property bool vertical: root.width < root.height
+	property int refDpi: 96
+	property int lWidth: 1280
+	property int mWidth: 800
+	property int sWidth: 300
+	property int ratio: 1
+	function calcRatio () {
+		ratio = 1
+		if (root.width >= sWidth) {
+			ratio = 2
+		}
+		if (root.width >= mWidth) {
+			ratio = 3
+		}
+		if (root.width >= lWidth) {
+			ratio = 4
+		}
+	}
+	onWidthChanged: calcRatio()
+	// onHeightChanged: calcRatio()
 	FontLoader {
 		id: ethnocentric
 		source: "ethnocentric.otf"

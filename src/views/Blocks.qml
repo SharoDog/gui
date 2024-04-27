@@ -11,7 +11,7 @@ Rectangle {
 		text: "Coming Soon"
 		color: fg_color
 		font.family: ethnocentric.font.family
-		font.pixelSize: 24
+		font.pixelSize: 6 * root.ratio
 		smooth: true
 	}
 }

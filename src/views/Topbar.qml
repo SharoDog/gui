@@ -26,7 +26,6 @@ Rectangle {
 					Layout.preferredHeight: root.vertical ? parent.height / 3 : -1
 					id: "iptext"
 					text: "IP Address:"
-					font.pixelSize: 24
 					fontSizeMode: Text.VerticalFit
 					verticalAlignment: Text.AlignVCenter
 				}

@@ -8,6 +8,8 @@ cmake_install.cmake
 install_manifest.txt
 compile_commands.json
 .ccls-cache/
+.cache/
 CTestTestfile.cmake
 _deps
 build/
+build2/

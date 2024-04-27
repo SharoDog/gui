@@ -111,15 +111,12 @@ Rectangle {
 			}
 		}
 	}
-	Text {
+	CustomText {
 		anchors.horizontalCenter: parent.horizontalCenter
 		anchors.verticalCenter: parent.verticalCenter
 		visible: !manager.connected
 		text: "Not Connected"
-		color: fg_color
-		font.family: ethnocentric.font.family
-		font.pixelSize: 24
-		smooth: true
+		font.pointSize: 16
 	}
 	ColumnLayout {
 		visible: manager.connected
@@ -128,15 +125,12 @@ Rectangle {
 		spacing: 10
 		CustomText {
 			text: qsTr("Cmd: ") + manager.command
-			font.pixelSize: 24
 		}
 		CustomText {
 			text: qsTr("Steering: ") + manager.steering.toFixed(2)
-			font.pixelSize: 24
 		}
 		CustomText {
 			text: qsTr("Speed: ") + manager.speed.toFixed(2)
-			font.pixelSize: 24
 		}
 		RowLayout {
 			spacing: 10
@@ -172,7 +166,7 @@ Rectangle {
 			}		
 		}
 		RowLayout {
-			spacing: 10
+			spacing: 15
 			Layout.alignment: Qt.AlignHCenter
 			CustomButton {
 				id: "emote3Button"
@@ -201,6 +195,7 @@ Rectangle {
 				rows: 2
 				columns: 3
 				Layout.alignment: Qt.AlignHCenter
+				Layout.fillWidth: true
 				ArrowButton {
 					id: "counterclockwiseButton"
 					text: String.fromCodePoint(0x21BA)
@@ -236,7 +231,7 @@ Rectangle {
 				Layout.fillWidth: true
 				CustomText {
 					text: "Steering:"	
-					font.pixelSize: 20
+					font.pointSize: 12
 				}
 				CustomSlider {
 					id: steeringSlider
@@ -247,7 +242,7 @@ Rectangle {
 				}
 				CustomText {
 					text: "Speed:"	
-					font.pixelSize: 20
+					font.pointSize: 12
 				}
 				CustomSlider {
 					id: speedSlider
@@ -258,11 +253,19 @@ Rectangle {
 					onMoved: manager.updateSpeed(speedSlider.value)
 				}				
 			}
-			ToggleButton {
-				id: "sensorsButton"
-				text: "Sensors"
-				onClicked: manager.toggleSensors(sensorsButton.pressed)
+			RowLayout {
+				spacing: 15
 				Layout.alignment: Qt.AlignHCenter
+				ToggleButton {
+					id: "sensorsButton"
+					text: "Sensors"
+					onClicked: manager.toggleSensors(sensorsButton.pressed)
+				}
+				ToggleButton {
+					id: "speechButton"
+					text: "Speech"
+					onClicked: manager.toggleSpeech(speechButton.pressed)
+				}
 			}
 		}
 	}

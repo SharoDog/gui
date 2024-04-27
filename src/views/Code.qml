@@ -1,7 +1,7 @@
-import QtQuick 6.5
-import QtQuick.Controls 6.5
-import QtQuick.Layouts 6.5
-import QtQuick.Dialogs 6.5
+import QtQuick 6.6
+import QtQuick.Controls 6.6
+import QtQuick.Layouts 6.6
+import QtQuick.Dialogs 6.6
 
 CustomPane {
 	id: code
@@ -60,7 +60,7 @@ CustomPane {
 				placeholderText: "# Write your code here or open an existing file"
 				placeholderTextColor: Qt.tint(root.fg_color, "#48000000")
 				color: root.fg_color
-				font.pixelSize: 14
+				font.pixelSize: 3 * root.ratio
 				smooth: true
 			}	
 			ScrollBar.vertical: ScrollBar {

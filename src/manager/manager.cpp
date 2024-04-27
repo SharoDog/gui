@@ -117,6 +117,13 @@ void Manager::toggleSensors(bool on) {
     commsSignal("sensors: False");
   }
 }
+void Manager::toggleSpeech(bool on) {
+  if (on) {
+    commsSignal("speech: True");
+  } else {
+    commsSignal("speech: False");
+  }
+}
 void Manager::sendCommand(const QString &command) {
   commsSignal(command.toStdString());
 }

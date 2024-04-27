@@ -1,7 +1,7 @@
-import QtQuick 6.5
-import QtQuick.Controls 6.5
-import QtQuick.Layouts 6.5
-import QtMultimedia 6.5
+import QtQuick 6.6
+import QtQuick.Controls 6.6
+import QtQuick.Layouts 6.6
+import QtMultimedia 6.6
 
 
 Rectangle {
@@ -11,15 +11,12 @@ Rectangle {
 		id: videoMouse
 		cursorShape: Qt.CrossCursor
 	}
-	Text {
+	CustomText {
 		anchors.horizontalCenter: parent.horizontalCenter
 		anchors.verticalCenter: parent.verticalCenter
 		visible: !manager.connected
 		text: "No Video"
-		color: fg_color
-		font.family: ethnocentric.font.family
-		font.pixelSize: 24
-		smooth: true
+		font.pointSize: 16
 	}    
 	ColumnLayout {
 		visible: manager.connected

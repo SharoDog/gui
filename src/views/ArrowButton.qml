@@ -14,7 +14,7 @@ Shape {
 		text: "Text"
 		color: button.pressed ? root.bg_color : root.fg_color
 		font.family: ethnocentric.font.family
-		font.pixelSize: 48
+		font.pointSize: 24
 		smooth: true
 	}
 	height: content.contentHeight + 4

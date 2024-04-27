@@ -1,7 +1,7 @@
-import QtQuick 6.5
-import QtQuick.Shapes 6.5
-import QtQuick.Controls 6.5
-import QtQuick.Layouts 6.5
+import QtQuick 6.6
+import QtQuick.Shapes 6.6
+import QtQuick.Controls 6.6
+import QtQuick.Layouts 6.6
 
 Rectangle {
 	id: tabbar
@@ -25,10 +25,10 @@ Rectangle {
 					anchors.horizontalCenter: parent.horizontalCenter
 					text: modelData
 					font.family: ethnocentric.font.family
-					font.pixelSize: 24
+					font.pointSize: 12
 					smooth: true
 				}
-				height: content.contentHeight + 4
+				height: content.contentHeight + root.ratio
 				ShapePath {
 					strokeWidth: tabbar.currentIndex == index ? 5 : 1
 					strokeColor: root.border_color

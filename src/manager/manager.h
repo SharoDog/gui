@@ -79,6 +79,7 @@ public:
 public slots:
   void establishConnection(const QString &);
   void toggleSensors(bool);
+  void toggleSpeech(bool);
   void sendCommand(const QString &);
   void updateSteering(double);
   void updateSpeed(double);

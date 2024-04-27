@@ -23,13 +23,12 @@ Item {
 				anchors.verticalCenter: parent.verticalCenter
 				CustomText {
 					text: "Attitude"
-					font.pixelSize: 36
+					font.pointSize: 16
 					Layout.alignment: Qt.AlignHCenter
 				}
 				CustomText {
 					text: "No Data"
 					visible: !manager.connected || !manager.attData
-					font.pixelSize: 24
 					Layout.alignment: Qt.AlignHCenter
 				}
 				ColumnLayout {
@@ -38,15 +37,12 @@ Item {
 					CustomText {
 						visible: false
 						text: qsTr("Heading: ") + manager.heading.toFixed(2) + String.fromCodePoint(0x00B0)
-						font.pixelSize: 24
 					}
 					CustomText {
 						text: qsTr("Pitch:      ") + manager.pitch.toFixed(2) + String.fromCodePoint(0x00B0)
-						font.pixelSize: 24
 					}
 					CustomText {
 						text: qsTr("Roll:       ") + manager.roll.toFixed(2) + String.fromCodePoint(0x00B0)
-						font.pixelSize: 24
 					}								
 				}
 			}
@@ -68,7 +64,7 @@ Item {
 					text: "Sharo"
 					color: root.fg_color
 					font.family: ethnocentric.font.family
-					font.pixelSize: 48
+					font.pointSize: 24
 					smooth: true
 					Layout.alignment: Qt.AlignHCenter
 				}
@@ -77,7 +73,7 @@ Item {
 					color: root.fg_color
 					font.family: ethnocentric.font.family
 					font.italic: true
-					font.pixelSize: 16
+					font.pointSize: 8
 					smooth: true
 					Layout.alignment: Qt.AlignHCenter
 				}						
@@ -97,13 +93,12 @@ Item {
 				anchors.verticalCenter: parent.verticalCenter
 				CustomText {
 					text: "GPS"
-					font.pixelSize: 36
+					font.pointSize: 16
 					Layout.alignment: Qt.AlignHCenter
 				}
 				CustomText {
 					text: "No Signal"
 					visible: !manager.connected || !manager.gpsSignal
-					font.pixelSize: 24
 					Layout.alignment: Qt.AlignHCenter
 				}
 				ColumnLayout {
@@ -111,15 +106,12 @@ Item {
 					visible: manager.connected && manager.gpsSignal
 					CustomText {
 						text: qsTr("Lat: ") + manager.lat.toFixed(2) + String.fromCodePoint(0x00B0)
-						font.pixelSize: 24
 					}
 					CustomText {
 						text: qsTr("Lon: ") + manager.lon.toFixed(2) + String.fromCodePoint(0x00B0)
-						font.pixelSize: 24
 					}
 					CustomText {
 						text: qsTr("Alt: ") + manager.alt.toFixed(2) + qsTr("m")
-						font.pixelSize: 24
 					}								
 				}						
 			}

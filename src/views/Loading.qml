@@ -7,6 +7,6 @@ Rectangle {
 		anchors.horizontalCenter: parent.horizontalCenter
 		anchors.verticalCenter: parent.verticalCenter
 		text: "Loading..."
-		font.pixelSize: 64
+		font.pointSize: 16 * ratio
 	}
 }

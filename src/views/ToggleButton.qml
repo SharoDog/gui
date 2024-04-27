@@ -7,17 +7,14 @@ Shape {
 	property alias text: content.text
 	property bool pressed: false
 	signal clicked
-	Text {
+	CustomText {
 		anchors.verticalCenter: parent.verticalCenter
 		anchors.horizontalCenter: parent.horizontalCenter
 		id: "content"
 		text: "Text"
 		color: button.pressed ? root.bg_color : root.fg_color
-		font.family: ethnocentric.font.family
-		font.pixelSize: 24
-		smooth: true
 	}
-	height: content.contentHeight + 4
+	height: content.contentHeight * 3 / 2
 	width: content.contentWidth + button.height / 2
 	ShapePath {
 		strokeWidth: 3
